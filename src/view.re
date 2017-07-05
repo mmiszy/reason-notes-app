@@ -1,17 +1,5 @@
-Js.log (Model.getNotes ());
+open ReasonJs.Dom;
 
-Model.addNote {text: "lol"};
+let x = Element.querySelector "lol";
 
-Js.log (Model.getNotes ());
-
-Model.addNote {text: "lol2"};
-
-Js.log (Model.getNotes ());
-
-Model.addNote {text: "lol2"};
-
-Js.log (Model.getNotes ());
-
-Model.deleteNote "1";
-
-Js.log (Model.getNotes ());
+document |> Document.createElement "div";
