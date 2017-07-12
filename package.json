@@ -2,9 +2,10 @@
   "name": "reason-js-1",
   "version": "0.1.0",
   "scripts": {
-    "clean": "bsb -clean-world",
-    "build": "npm run clean && bsb -make-world",
-    "watch": "npm run clean && bsb -make-world -w"
+    "clean": "bsb -clean-world && rm -rf bundledOutputs",
+    "build": "npm run clean && bsb -make-world && webpack -p",
+    "watch": "npm run clean && bsb -make-world -w",
+    "watch:webpack": "webpack -w"
   },
   "keywords": [
     "BuckleScript"
@@ -12,9 +13,11 @@
   "license": "MIT",
   "devDependencies": {
     "bs-platform": "1.8.0",
-    "shared-git-hooks": "^1.2.1"
+    "shared-git-hooks": "^1.2.1",
+    "webpack": "^3.0.0"
   },
   "dependencies": {
-    "bs-webapi": "^0.4.1"
+    "bs-json": "0.1.0",
+    "bs-webapi": "0.4.1"
   }
 }
