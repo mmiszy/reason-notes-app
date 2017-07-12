@@ -37,7 +37,9 @@ let createForm () => {
           );
         switch (form |> Element.getAttribute "data-note-id") {
         | None => raise (Invalid_argument "data-note-id missing")
-        | Some id => Model.updateNote {text, id}
+        | Some id =>
+          Model.updateNote {text, id};
+          Model.saveNotes ()
         };
         ()
       }
@@ -46,6 +48,7 @@ let createForm () => {
 };
 
 let init (mainSelector: string) :unit => {
+  Model.loadNotes ();
   let mainEl =
     switch (document |> Document.querySelector mainSelector) {
     | None => raise (Invalid_argument ("document.querySelector " ^ mainSelector))

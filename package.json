@@ -3,16 +3,20 @@
   "version": "0.1.0",
   "scripts": {
     "clean": "bsb -clean-world && rm -rf bundledOutputs",
-    "build": "npm run clean && bsb -make-world && webpack -p",
-    "watch": "npm run clean && bsb -make-world -w",
-    "watch:webpack": "webpack -w"
+    "build": "npm run clean && bsb -make-world && npm test && webpack -p",
+    "watch:bsb": "npm run clean && bsb -make-world -w",
+    "watch:webpack": "webpack -w",
+    "watch:test": "jest --watchAll",
+    "test": "jest"
   },
   "keywords": [
     "BuckleScript"
   ],
   "license": "MIT",
   "devDependencies": {
+    "bs-jest": "0.1.0",
     "bs-platform": "1.8.0",
+    "jest": "20.0.4",
     "shared-git-hooks": "^1.2.1",
     "webpack": "^3.0.0"
   },
