@@ -5,6 +5,8 @@ open Notes_utils;
 /* wut */
 external setValue : Element.t => string => unit = "value" [@@bs.set];
 
+external focus : Element.t => unit = "focus" [@@bs.send];
+
 let getFormElement () =>
   switch (document |> Document.querySelector "form") {
   | None => raise (Invalid_argument "getFormElement failed")
@@ -27,6 +29,7 @@ let selectNote (note: complete_note) => {
   let form = getFormElement ();
   Element.setAttribute "data-note-id" note.id form;
   setValue (getTextarea ()) note.text;
+  focus (getTextarea ());
   ()
 };
 
@@ -37,7 +40,13 @@ let updateList () :unit => {
   List.iter (
     fun note => {
       let li = document |> Document.createElement "li";
-      Element.setTextContent li note.text;
+      let text =
+        if (String.length note.text > 10) {
+          String.sub note.text 0 10 ^ "..."
+        } else {
+          note.text
+        };
+      Element.setTextContent li text;
       Element.addEventListener
         "click"
         (
@@ -71,7 +80,9 @@ let createList () => {
     "click"
     (
       fun _e => {
-        let _ = Model.addNote {text: ""};
+        let newNote = Model.addNote {text: ""};
+        selectNote newNote;
+        focus (getTextarea ());
         updateList ();
         ()
       }
