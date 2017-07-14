@@ -48,6 +48,8 @@ let updateNote (note: complete_note) :complete_note => {
 
 let getNotes () :list complete_note => _notes.contents;
 
+let getNoteById id :complete_note => List.find (fun note => note.id === id) _notes.contents;
+
 let deleteNote (id: string) :unit => {
   _notes.contents = List.filter (fun n => n.id !== id) _notes.contents;
   ()
