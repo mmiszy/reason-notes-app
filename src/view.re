@@ -72,7 +72,7 @@ let createList () => {
   Element.setId ul "notes-list";
   let button = document |> Document.createElement "button";
   Element.setId button "add-note-button";
-  Element.setInnerText button "Dodaj";
+  Element.setInnerText button "Add new note";
   container |> Element.appendChild ul;
   container |> Element.appendChild button;
   button |>
